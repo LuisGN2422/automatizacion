@@ -1,16 +1,18 @@
-# This is a sample Python script.
+import json
+dic_data = {'swtiches':[
+    {"model":'CAT3750',
+     "model":'CAT3760'}[
+     'routers':{'name':'CSR100V',
+                'vendor': 'cisco',
+                'type': 'hardware'
+                }
+    ]
 
-# Press Mayús+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+]}
 
+#Tarea hacer un diccionario de nuestros cuatro elementos
+#O hacer una infraestructura o diccionario con 4 componentes local
+print(json.dumps(dic_data, indent=2))
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    pass
