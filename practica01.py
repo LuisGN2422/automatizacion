@@ -1,9 +1,10 @@
 import paramiko
 import json
 import re
+import os
 
 # Credenciales SSH
-hostname = '192.168.100.120'
+hostname = '192.168.43.108'
 port = 22
 username = 'devasc'
 password = 'Cisco123!'
@@ -58,15 +59,24 @@ try:
     filtered_users = [user for user in users_list if user in ['devasc', 'root']]
     users_info['users'] = filtered_users
 
-    # Imprimir los diccionarios con formato JSON
-    print("Información del Sistema:")
-    print(json.dumps(system_info, indent=2))
-    print("\nInformación de Tarjetas de Red:")
-    print(json.dumps(network_info, indent=2))
-    print("\nAlmacenamiento Usado del 100%:")
-    print(json.dumps(storage_info, indent=2))
-    print("\nUsuarios Registrados:")
-    print(json.dumps(users_info, indent=2))
+    # Combinar toda la información en un solo diccionario
+    all_info = {
+        'system_info': system_info,
+        'network_info': network_info,
+        'storage_info': storage_info,
+        'users_info': users_info
+    }
+
+    # Imprimir los diccionarios combinados con formato JSON
+    print("Información completa:")
+    print(json.dumps(all_info, indent=2))
+
+    # Asegurarse de que el directorio existe
+    os.makedirs('./data', exist_ok=True)
+
+    # Guardar el diccionario combinado en un archivo JSON
+    with open("./data/Infraestructura-Local.json", "w") as file:
+        json.dump(all_info, file, indent=4, sort_keys=True)
 
 except paramiko.AuthenticationException:
     print(f'Error de autenticación al conectar a {hostname}')
@@ -77,5 +87,6 @@ finally:
 
 if __name__ == '__main__':
     pass
+
 
 
